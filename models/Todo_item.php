@@ -85,4 +85,35 @@ class Todo_item
 
         return false;
     }
+
+    public function updateTodo()
+    {
+        $query = "UPDATE " .
+            $this->table . "
+            SET 
+                name = :name,
+                completed = :completed
+            WHERE
+                id = :id";
+
+        $stmt = $this->conn->prepare($query);
+
+
+        // Clean data.
+        $this->name = htmlspecialchars(strip_tags($this->name));
+        $this->completed = htmlspecialchars(strip_tags($this->completed));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":completed", $this->completed);
+        $stmt->bindParam(":id", $this->id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        printf("Error: %s.\n, $stmt->error");
+
+        return false;
+    }
 }
