@@ -25,9 +25,9 @@ if ($row_count > 0) {
         extract($row);
 
         $todo_item = array(
-            "id" => $id,
+            "id" => intval($id),
             "name" => $name,
-            "completed" => $completed,
+            "completed" => intval($completed),
         );
 
         // Push to "data"
