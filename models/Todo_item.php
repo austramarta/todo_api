@@ -78,7 +78,7 @@ class Todo_item
         $stmt->bindParam(":completed", $this->completed);
 
         if ($stmt->execute()) {
-            return true;
+            return $this->conn->lastInsertId();
         }
 
         printf("Error: %s.\n, $stmt->error");

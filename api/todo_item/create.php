@@ -21,9 +21,9 @@ $new_todo->name = $data->name;
 $new_todo->completed = $data->completed;
 
 //create the new_todo
-if ($new_todo->createTodo()) {
+if ($id = $new_todo->createTodo()) {
     echo json_encode(
-        array("message" => "Todo Created")
+        array("message" => "Todo Created", "id" => $id, "name" => $data->name)
     );
 } else {
     echo json_encode(
